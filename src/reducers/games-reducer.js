@@ -12,7 +12,7 @@ const boardGamesReducer = (state = [], action) => {
         id: jsonData.items.item._attributes.id,
         name: jsonData.items.item.name._attributes.value
       }
-
+      
       return [...state, game];
     default:
         return state;
