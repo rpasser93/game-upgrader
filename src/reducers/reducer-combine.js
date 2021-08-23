@@ -1,13 +1,8 @@
-import { FETCH_GAME } from '../constants';
+import { combineReducers } from "redux";
+import boardGamesReducer from './games-reducer';
 
-const boardGamesReducer = (state = [], action) => {
-  switch (action.type) {
-    case FETCH_GAME:
-      console.log(action.payload.data);
-      return state;
-      default:
-        return state;
-  }
-};
+const rootReducer = combineReducers({
+  games: boardGamesReducer,
+})
 
-export default boardGamesReducer
+export default rootReducer;
