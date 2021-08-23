@@ -8,7 +8,6 @@ const BoardGameList = () => {
   const renderGames = () => {
     if (!_.isEmpty(games)) {
       return games.map((game) => {
-        console.log(game);
         return (<div key={game.gameId} className="col-md-3 offset-md-3">
             <GameListItem game={game}/>          
           </div>

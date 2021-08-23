@@ -6,10 +6,9 @@ const boardGamesReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_GAME:
       const jsonData = xml2js(action.payload.data, {compact: true, spaces: 4});
-
-      console.log(jsonData.items.item);
-
       const gameData = jsonData.items.item;
+
+      const currentId = state.length + 1;
 
       let gameId = '';
       let name = '';
@@ -23,6 +22,7 @@ const boardGamesReducer = (state = [], action) => {
       }
 
       const game = {
+        id: currentId,
         gameId: gameId,
         name: name
       }
