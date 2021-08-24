@@ -7,9 +7,15 @@ const SearchResults = () => {
 
   const renderResults = () => {
     if (!_.isEmpty(results)) {
-      return results.map((result) => {
-        return (<div key={result.gameId} className="col-md-3 offset-md-3">
-            <SearchResultItem game={result}/>          
+      return results.map((result, index) => {
+        let backButton = false;
+
+        if (index % 10 === 0 && index !== 0)
+          backButton = true;
+
+        return (
+          <div key={result.gameId} className="col-md-3 offset-md-3">
+            <SearchResultItem result={result} backButton={backButton}/>          
           </div>
         )
       });

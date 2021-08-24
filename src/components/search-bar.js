@@ -31,7 +31,7 @@ const SearchBar = () => {
        </div>
 
        <button className="btn btn-primary search-btn btn-sm" type="submit">
-         Add Game
+         Search
        </button>        
      </form>
      <hr></hr>
