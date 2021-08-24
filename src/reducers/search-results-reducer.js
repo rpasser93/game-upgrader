@@ -1,10 +1,20 @@
+import { isArray } from 'lodash';
 import { FETCH_GAMES_BY_ID_SUCCESS } from "../constants";
 
 const searchResultsReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_GAMES_BY_ID_SUCCESS:
-      console.log(action.payload);
-      return state;
+
+      const games = action.payload.map(game => {
+        return {
+          gameId: game._attributes.id,
+          name: isArray(game.name) ? game.name[0]._attributes.value : game.name._attributes.value,
+          imgUrl: game?.image?._text ? game.image._text : '',
+          thumbnailUrl: game?.thumbnail?._text ? game.thumbnail._text : ''
+        }
+      })
+
+      return [...state, ...games];
 
     default:
       return state;
