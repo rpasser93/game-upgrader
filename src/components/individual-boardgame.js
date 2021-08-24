@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 const IndividualBoardgame = ({id, history}) => {
   const games = useSelector((state) => state.games);
-  const game = useSelector((state) => state.gameId);
 
   const handleClick = () => {
     console.log('click!');
@@ -13,6 +12,10 @@ const IndividualBoardgame = ({id, history}) => {
 
   if (!_.find(games, {id: id}))
     return <h1>Game not found</h1>
+
+  const game = games.find((current) => {
+    return current.id === id;
+  })
 
   console.log(game);
 
