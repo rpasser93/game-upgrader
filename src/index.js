@@ -2,18 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import App from './App';
+
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers/reducer-combine'
-import promise from 'redux-promise';
-import IndividualBoardgame from './components/individual-boardgame';
+import thunk from 'redux-thunk';
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+import rootReducer from './reducers/reducer-combine'
+import IndividualBoardgame from './components/individual-boardgame';
+import App from './App';
+
+// Create a store using redux-thunk to let actions return functions
+// This allows us to chain action calls and handle errors in a much cleaner fashion
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(rootReducer)}>
+  <Provider store={store}>
     <BrowserRouter>
       <Switch>
         <Route exact path='/' component={App}/>
