@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/reducer-combine'
 import IndividualBoardgame from './components/individual-boardgame';
 import App from './App';
+import SearchResults from './components/search-results';
 
 // Create a store using redux-thunk to let actions return functions
 // This allows us to chain action calls and handle errors in a much cleaner fashion
@@ -28,6 +29,7 @@ ReactDOM.render(
           history={routerProps.history}
           />     
         )}/>
+        <Route path='/results' component={SearchResults}/>
       </Switch>
     </BrowserRouter>
   </Provider>,

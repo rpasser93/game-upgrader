@@ -1,15 +1,18 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import { useHistory } from 'react-router';
 import {fetchGame, fetchGames} from '../actions/actions';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     // dispatch(fetchGame(search));
     dispatch(fetchGames(search));
     e.preventDefault();
+    history.push('/results');
   }
 
   return (
