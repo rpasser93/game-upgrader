@@ -1,13 +1,14 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {fetchGame} from '../actions/actions';
+import {fetchGame, fetchGames} from '../actions/actions';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
-    dispatch(fetchGame(search));
+    // dispatch(fetchGame(search));
+    dispatch(fetchGames(search));
     e.preventDefault();
   }
 
