@@ -10,7 +10,7 @@ const GameListItem = ({game}) => {
   }
 
   return (
-    <Link onClick={handleClick} to={`/games/${game.id}`}>{game.name}</Link>
+    <Link onClick={handleClick} to={`/games/${game.id}`} className="game-list-link">{game.name}</Link>
   )
 }
 
