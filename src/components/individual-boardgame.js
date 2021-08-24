@@ -6,7 +6,6 @@ const IndividualBoardgame = ({id, history}) => {
   const games = useSelector((state) => state.games);
 
   const handleClick = () => {
-    console.log('click!');
     history.push('/games');
   }
 

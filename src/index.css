@@ -35,3 +35,11 @@ code {
   display: block;
   text-align: center;
 }
+
+.thumbnail-list-image {
+  cursor: pointer;
+}
+
+.thumbnail-column {
+  margin-bottom: 25px;
+}

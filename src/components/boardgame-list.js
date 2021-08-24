@@ -8,8 +8,8 @@ const BoardGameList = () => {
   const renderGames = () => {
     if (!_.isEmpty(games)) {
       return games.map((game) => {
-        return (<div key={game.id} className="col-md-3 offset-md-3">
-            <GameListItem game={game}/>          
+        return (<div key={game.id} className="col-xl-3 thumbnail-column">
+            <GameListItem game={game} />          
           </div>
         )
       });
@@ -17,8 +17,8 @@ const BoardGameList = () => {
   }
 
   return (
-    <div className="games-list">
-      <div className ="col-md-6 offset-3">
+    <div className="row games-list">
+      <div className ="col-6 offset-3">
       <div className="row align-items-start">
         {renderGames()}
       </div>
