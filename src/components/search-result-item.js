@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { BACK_ARROW_IMG } from "../constants";
-import {addGame} from '../actions/actions';
+import { addGame, clearResults } from '../actions/actions';
 
 const SearchResultItem = ({result, backButton}) => {
   const history = useHistory();
@@ -13,6 +13,7 @@ const SearchResultItem = ({result, backButton}) => {
 
   const handleBackClick = () => {
     history.push('/games');
+    dispatch(clearResults());
   }
 
   return (

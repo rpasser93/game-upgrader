@@ -2,7 +2,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import { isArray } from 'lodash';
 import { xml2js } from 'xml-js';
-import { ROOT_URL, ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAME_BY_ID_SUCCESS, FETCH_GAMES_BY_ID_SUCCESS, ADD_GAME } from '../constants';
+import { ROOT_URL, ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAME_BY_ID_SUCCESS, FETCH_GAMES_BY_ID_SUCCESS, ADD_GAME, CLEAR_RESULTS } from '../constants';
 
 // Fetches a game based on a search query and dispatches fetchGameById with the result's id attribute
 // export function fetchGame(query) {
@@ -91,5 +91,11 @@ export function addGame(game) {
   return {
     type: ADD_GAME,
     payload: game
+  }
+}
+
+export function clearResults() {
+  return {
+    type: CLEAR_RESULTS
   }
 }

@@ -26,6 +26,7 @@ const SearchResults = () => {
     <div className="games-list">
       <div className ="col-md-6 offset-3">
       <div className="row align-items-start">
+        <h1>Results:</h1>
         {renderResults()}
       </div>
       </div>

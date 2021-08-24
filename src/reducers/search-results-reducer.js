@@ -1,5 +1,5 @@
 import { isArray } from 'lodash';
-import { FETCH_GAMES_BY_ID_SUCCESS } from "../constants";
+import { FETCH_GAMES_BY_ID_SUCCESS, CLEAR_RESULTS } from "../constants";
 
 const searchResultsReducer = (state = [], action) => {
   switch (action.type) {
@@ -15,6 +15,9 @@ const searchResultsReducer = (state = [], action) => {
       })
 
       return [...state, ...games];
+    
+    case CLEAR_RESULTS:
+      return [];
 
     default:
       return state;
