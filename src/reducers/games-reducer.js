@@ -14,6 +14,8 @@ const boardGamesReducer = (state = [], action) => {
         thumbnailUrl: gameData.thumbnail._text
       }
 
+      console.log(game);
+
       return [...state, game];
     default:
         return state;
