@@ -5,7 +5,7 @@ const searchResultsReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_GAMES_BY_ID_SUCCESS:
 
-      const games = action.payload.map(game => {
+      const results = action.payload.map(game => {
         return {
           gameId: game._attributes.id,
           name: isArray(game.name) ? game.name[0]._attributes.value : game.name._attributes.value,
@@ -14,7 +14,7 @@ const searchResultsReducer = (state = [], action) => {
         }
       })
 
-      return [...state, ...games];
+      return results;
     
     case CLEAR_RESULTS:
       return [];

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { BACK_ARROW_IMG } from "../constants";
 import { addGame, clearResults } from '../actions/actions';
 
-const SearchResultItem = ({result, backButton}) => {
+const SearchResultItem = ({result, backButton, hasGame}) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -19,11 +19,13 @@ const SearchResultItem = ({result, backButton}) => {
   return (
     <div>
       <div>
-        <p>{result.name}</p>
+        <p><strong>{result.name}</strong></p>
         <img src={result.thumbnailUrl} alt={result.name}></img>
-        <button className="btn btn-primary search-btn btn-sm" onClick={handleAddClick}>
+        {!hasGame && <button className="btn btn-primary search-btn btn-sm" onClick={handleAddClick}>
             Add to Shelf
-        </button>    
+        </button>}
+
+        {hasGame && <p><em>Game on shelf</em></p>}
       </div>
       
       <div>
