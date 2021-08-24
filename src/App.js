@@ -1,9 +1,13 @@
 import './App.css';
 import SearchBar from './components/search-bar'
+import BoardGameList from './components/boardgame-list';
 
 function App() {
   return (
-    <SearchBar />
+    <div>
+      <SearchBar />
+      <BoardGameList/>
+    </div>
   ) 
 }
 
