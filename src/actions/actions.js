@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { isArray } from 'lodash';
 import { xml2js } from 'xml-js';
-import { ROOT_URL, ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAME_BY_ID_SUCCESS } from '../constants';
+import { ROOT_URL, ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAME_BY_ID_SUCCESS, FETCH_GAMES_BY_ID_SUCCESS } from '../constants';
 
 // Fetches a game based on a search query and dispatches fetchGameById with the result's id attribute
 // export function fetchGame(query) {
@@ -64,15 +64,24 @@ export function fetchGamesByIds(ids) {
     .then(response => {
       
       const data = xml2js(response.data, {compact: true, space: 4});
-      console.log(data);
+      const games = data.items.item;
+      
+      dispatch(fetchGamesByIdsSuccess(games));
     })
   }
 }
 
 // Action creator for adding a game to the gamesReducer
-export function fetchGameByIdSuccess(game) {
+// export function fetchGameByIdSuccess(game) {
+//   return {
+//     type: FETCH_GAME_BY_ID_SUCCESS,
+//     payload: game
+//   }
+// }
+
+export function fetchGamesByIdsSuccess(games) {
   return {
-    type: FETCH_GAME_BY_ID_SUCCESS,
-    payload: game
+    type: FETCH_GAMES_BY_ID_SUCCESS,
+    payload: games
   }
 }
