@@ -16,8 +16,6 @@ const IndividualBoardgame = ({id, history}) => {
     return current.id === id;
   })
 
-  console.log(game);
-
   return (
     <div className="container">
       <div className="row align-content-start">

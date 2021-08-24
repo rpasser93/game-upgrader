@@ -1,20 +1,12 @@
-import { FETCH_GAME_BY_ID_SUCCESS } from '../constants';
+import { ADD_GAME} from '../constants';
 
 const boardGamesReducer = (state = [], action) => {
   switch (action.type) {
-    case FETCH_GAME_BY_ID_SUCCESS:
-      const gameData = action.payload.items.item;
+    case ADD_GAME:
       const currentId = state.length + 1;
+      action.payload.id = currentId;
 
-      const game = {
-        id: currentId,
-        gameId: gameData._attributes.id,
-        name: gameData.name[0]._attributes.value,
-        imgUrl: gameData.image._text,
-        thumbnailUrl: gameData.thumbnail._text
-      }
-
-      return [...state, game];
+      return [...state, action.payload];
     default:
         return state;
   }
