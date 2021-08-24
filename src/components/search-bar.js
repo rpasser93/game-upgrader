@@ -19,15 +19,15 @@ const SearchBar = () => {
 
        <div className="form-group">
 
-         <input className="form-control"
-          placeholder="Enter game" onChange={(e) => setSearch(e.target.value)}>
+         <input className="form-control list-page-search-bar"
+          placeholder="Enter game name" onChange={(e) => setSearch(e.target.value)}>
 
           </input>
 
        </div>
 
-       <button className="btn btn-primary search-btn" type="submit">
-         Submit
+       <button className="btn btn-primary search-btn btn-sm" type="submit">
+         Add Game
        </button>        
      </form>
      <hr></hr>

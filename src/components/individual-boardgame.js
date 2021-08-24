@@ -1,9 +1,15 @@
 import { useSelector } from "react-redux";
+import { BACK_ARROW_IMG } from '../constants';
 import _ from 'lodash';
 
 const IndividualBoardgame = ({id, history}) => {
   const games = useSelector((state) => state.games);
   const game = useSelector((state) => state.gameId);
+
+  const handleClick = () => {
+    console.log('click!');
+    history.push('/games');
+  }
 
   if (!_.find(games, {id: id}))
     return <h1>Game not found</h1>
@@ -11,8 +17,17 @@ const IndividualBoardgame = ({id, history}) => {
   console.log(game);
 
   return (
-    <div>
-      <p>{game.name}</p>
+    <div className="container">
+      <div className="row align-content-start">
+        <div className="col-4">
+          <img src={BACK_ARROW_IMG} alt= "" className="back-arrow-image rounded float-end" onClick={handleClick} />
+        </div>
+        <div className="col-4">
+          <img src={game.imgUrl} alt="" className="ind-game-image mx-auto d-block" />
+          <br></br>
+          <h1 className="text-center">{game.name}</h1>
+        </div>
+      </div>
     </div>
   )
 }

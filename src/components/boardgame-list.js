@@ -18,8 +18,10 @@ const BoardGameList = () => {
 
   return (
     <div className="games-list">
-      <div className="row">
+      <div className ="col-md-6 offset-3">
+      <div className="row align-items-start">
         {renderGames()}
+      </div>
       </div>
     </div>
   )
