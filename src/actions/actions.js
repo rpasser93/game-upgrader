@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { xml2js } from 'xml-js';
 import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, 
   ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR, 
-  FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS} from '../constants';
+  FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS, FETCH_EXPANSIONS_ERROR} from '../constants';
 
 // Function that retrieves ids from xml responses
 const getIdsFromXML = (xml) => {
@@ -55,7 +55,7 @@ export function fetchExpansionsByIds(ids) {
       dispatch(fetchExpansionsByIdsSuccess(getGameDataFromXML(response.data)));
     })
     .catch(error => {
-      console.log(error);
+      dispatch(fetchExpansionsByIdsError(error));
     })
   }
 }
@@ -88,6 +88,14 @@ export function fetchGamesError(error, query) {
 export function fetchGamesByIdsError(error) {
   return {
     type: FETCH_GAMES_BY_ID_ERROR,
+    payload: error
+  }
+}
+
+// Action creator for expansion id fetch errors
+export function fetchExpansionsByIdsError(error) {
+  return {
+    type: FETCH_EXPANSIONS_ERROR,
     payload: error
   }
 }
