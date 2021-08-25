@@ -1,9 +1,7 @@
-import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { addGame, clearResults } from '../actions/actions';
+import { addGame } from '../actions/actions';
 
-const SearchResultItem = ({result, backButton, hasGame}) => {
-  const history = useHistory();
+const SearchResultItem = ({result, hasGame}) => {
   const dispatch = useDispatch();
 
   const handleAddClick = () => {

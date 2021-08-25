@@ -3,28 +3,39 @@ import _ from 'lodash';
 import SearchResultItem from "./search-result-item";
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { clearResults } from "../actions/actions"
 import { BACK_ARROW_IMG } from "../constants";
+import { clearResults, clearError } from "../actions/actions"
 
 const SearchResults = () => {
   const results = useSelector(state => state.searchResults);
   const games = useSelector(state => state.games);
+  const error = useSelector(state => state.errors);
 
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const handleErrorBackClick = () => {
+    history.push('/games');
+    dispatch(clearError());
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h1>{error}</h1>
+        <img src={BACK_ARROW_IMG} alt= "" className="back-arrow-image" onClick={handleErrorBackClick}/>  
+      </div>   
+    )
+  }
+  
   const renderResults = () => {
     if (!_.isEmpty(results)) {
-      return results.map((result, index) => {
-        let backButton = false;
+      return results.map((result) => {
         let hasGame = _.find(games, {id: result.id});
-
-        if (index % 10 === 0 && index !== 0)
-          backButton = true;
 
         return (
           <div key={result.id} className="col-md-2">
-            <SearchResultItem result={result} backButton={backButton} hasGame={hasGame}/>          
+            <SearchResultItem result={result} hasGame={hasGame}/>          
           </div>
         )
       });
