@@ -24,7 +24,7 @@ code {
 }
 
 .list-page-search-bar {
-  margin-top: 30px;
+  margin-top: 15px;
 }
 
 .search-btn {
@@ -37,9 +37,22 @@ code {
 }
 
 .thumbnail-list-image {
+  margin-top: 7px;
   cursor: pointer;
 }
 
 .thumbnail-column {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+}
+
+.title {
+  margin-top: 15px;
+}
+
+.magnifying-glass-icon {
+  width: 35px;
+}
+
+.magnifying-glass-icon:hover {
+  border: solid thin white;
 }
