@@ -13,8 +13,10 @@ const IndividualBoardgame = ({id, history}) => {
   }
 
   const handleRemoveClick = () => {
-    dispatch(removeGame(game.id));
-    history.push('/games');
+    if (window.confirm('Are you sure you want to remove this game from your shelf?')) {
+      dispatch(removeGame(game.id));
+      history.push('/games');
+    }
   }
 
   if (!_.find(games, {id: id}))
