@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { xml2js } from 'xml-js';
 import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, 
   ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR, 
-  FETCH_GAMES_BY_ID_ERROR } from '../constants';
+  FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS} from '../constants';
 
 // Function that retrieves ids from xml responses
 const getIdsFromXML = (xml) => {
@@ -48,7 +48,7 @@ export function fetchExpansions(game) {
 }
 
 // Fetches games using a supplied array of ids
-export function fetchGamesByIds(ids) {
+const fetchGamesByIds = (ids) => {
   return (dispatch) => {
     axios.get(`${ID_FETCH_URL}${ids.join()}`)
     .then(response => {
@@ -60,12 +60,12 @@ export function fetchGamesByIds(ids) {
   }
 }
 
-export function fetchExpansionsByIds(ids) {
+// Fetches expansions using a supplied array of ids
+const fetchExpansionsByIds = (ids) => {
   return (dispatch) => {
     axios.get(`${ID_FETCH_URL}${ids.join()}`)
     .then(response => {
-      console.log(getGameDataFromXML(response.data));
-      // dispatch(fetchGamesByIdsSuccess(getGameDataFromXML(response.data)));
+      dispatch(fetchExpansionsByIdsSuccess(getGameDataFromXML(response.data)));
     })
     .catch(error => {
       console.log(error);
@@ -73,7 +73,7 @@ export function fetchExpansionsByIds(ids) {
   }
 }
 
-// Action creator for id fetch success
+// Action creator for game id fetch success
 export function fetchGamesByIdsSuccess(games) {
   return {
     type: FETCH_GAMES_BY_ID_SUCCESS,
@@ -81,6 +81,13 @@ export function fetchGamesByIdsSuccess(games) {
   }
 }
 
+// Action creator for expansion id fetch success
+export function fetchExpansionsByIdsSuccess(expansions) {
+  return {
+    type: FETCH_EXPANSIONS_SUCCESS,
+    payload: expansions
+  }
+}
 
 // Action creator for query fetch errors
 export function fetchGamesError(error, query) {

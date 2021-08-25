@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import {useDispatch} from 'react-redux';
-import {removeGame, fetchGames} from '../actions/actions';
+import {removeGame, fetchExpansions} from '../actions/actions';
 import { BACK_ARROW_IMG, REMOVE_GAME_IMG } from '../constants';
 import _ from 'lodash';
 
@@ -25,6 +25,8 @@ const IndividualBoardgame = ({id, history}) => {
   const game = games.find((current) => {
     return current.id === id;
   })
+
+  dispatch(fetchExpansions(game.name));
 
   return (
     <div className="container">
