@@ -1,8 +1,11 @@
 import axios from 'axios';
 import _ from 'lodash';
 import { xml2js } from 'xml-js';
-import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, ADD_GAME, CLEAR_RESULTS, REMOVE_GAME } from '../constants';
+import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, 
+  ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR, 
+  FETCH_GAMES_BY_ID_ERROR } from '../constants';
 
+// Fetches multiple games according to a query and dispatches another action with the fetched ids
 export function fetchGames(query) {
   return (dispatch) => {
     axios.get(`${FETCH_MULTIPLE_URL}${query}`)
@@ -14,14 +17,16 @@ export function fetchGames(query) {
         return game._attributes.id
       })
       
+      // Avoid duplicate ids
       dispatch(fetchGamesByIds(_.uniq(ids)));
     })
     .catch(error => {
-      console.log(error);
+      dispatch(fetchGamesError(error, query));
     })
   }
 }
 
+// Fetches games using a supplied array of ids
 export function fetchGamesByIds(ids) {
   return (dispatch) => {
     axios.get(`${ID_FETCH_URL}${ids.join()}`)
@@ -32,9 +37,13 @@ export function fetchGamesByIds(ids) {
       
       dispatch(fetchGamesByIdsSuccess(games));
     })
+    .catch(error => {
+      dispatch(fetchGamesByIdsError(error));
+    })
   }
 }
 
+// Action creator for id fetch success
 export function fetchGamesByIdsSuccess(games) {
   return {
     type: FETCH_GAMES_BY_ID_SUCCESS,
@@ -42,6 +51,23 @@ export function fetchGamesByIdsSuccess(games) {
   }
 }
 
+// Action creator for query fetch errors
+export function fetchGamesError(error, query) {
+  return {
+    type: FETCH_GAMES_ERROR,
+    payload: [error, query]
+  }
+}
+
+// Action creator for id fetch errors
+export function fetchGamesByIdsError(error) {
+  return {
+    type: FETCH_GAMES_BY_ID_ERROR,
+    payload: error
+  }
+}
+
+// Action creator for adding a game to the store
 export function addGame(game) {
   return {
     type: ADD_GAME,
@@ -57,8 +83,16 @@ export function removeGame(id) {
   }
 }
 
+// Action creator for clearing the search results
 export function clearResults() {
   return {
     type: CLEAR_RESULTS
+  }
+}
+
+// Action creator for clearing error messages
+export function clearError() {
+  return {
+    type: CLEAR_ERROR
   }
 }

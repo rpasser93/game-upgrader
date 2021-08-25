@@ -1,9 +1,8 @@
-import { REMOVE_GAME, ADD_GAME } from '../constants';    //add REMOVE GAME back in below
+import { REMOVE_GAME, ADD_GAME } from '../constants';
 
 const boardGamesReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_GAME:
-      console.log(action.payload);
       return [...state, action.payload];
     case REMOVE_GAME:
       return state.filter(game => game.id !== action.payload );
