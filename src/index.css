@@ -101,3 +101,7 @@ code {
 .back-from-search {
   margin-top: 20px;
 }
+
+.loading-spinner {
+  width: 400px;
+}
