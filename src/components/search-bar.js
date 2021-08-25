@@ -2,11 +2,14 @@ import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {fetchGame} from '../actions/actions';
 import {MAG_GLASS_IMG} from '../constants';
+import { useHistory } from 'react-router';
+import {fetchGames} from '../actions/actions';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
   const [inputValue, setInputValue] = useState('');
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -14,9 +17,10 @@ const SearchBar = () => {
   }
 
   const handleSubmit = (e) => {
-    dispatch(fetchGame(search));
+    dispatch(fetchGames(search));
     setInputValue('');
     e.preventDefault();
+    history.push('/results');
   }
 
   return (
