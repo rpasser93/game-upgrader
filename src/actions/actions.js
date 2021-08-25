@@ -59,6 +59,7 @@ export function fetchGamesError(error, query) {
   }
 }
 
+// Action creator for id fetch errors
 export function fetchGamesByIdsError(error) {
   return {
     type: FETCH_GAMES_BY_ID_ERROR,
