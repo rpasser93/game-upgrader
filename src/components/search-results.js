@@ -3,7 +3,7 @@ import _ from 'lodash';
 import SearchResultItem from "./search-result-item";
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { BACK_ARROW_IMG } from "../constants";
+import { BACK_ARROW_IMG, LOADING_SPINNER_GIF } from "../constants";
 import { clearResults, clearError } from "../actions/actions"
 
 const SearchResults = () => {
@@ -29,17 +29,22 @@ const SearchResults = () => {
   }
   
   const renderResults = () => {
-    if (!_.isEmpty(results)) {
+    if (_.isEmpty(results)) {
+      return (
+      <div className="col-md-8 offset-2">
+        <img src={LOADING_SPINNER_GIF} alt='' className="loading-spinner rounded mx-auto d-block"/>
+      </div>
+      )}
+
       return results.map((result) => {
         let hasGame = _.find(games, {id: result.id});
-
+        
         return (
           <div key={result.id} className="col-md-2">
             <SearchResultItem result={result} hasGame={hasGame}/>          
           </div>
         )
       });
-    }
   }
 
   const handleBackClick = () => {    

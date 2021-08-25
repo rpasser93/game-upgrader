@@ -1,7 +1,7 @@
 import { isArray } from 'lodash';
 import { FETCH_GAMES_BY_ID_SUCCESS, CLEAR_RESULTS } from "../constants";
 
-const searchResultsReducer = (state = [], action) => {
+const searchResultsReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_GAMES_BY_ID_SUCCESS:
 
