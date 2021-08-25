@@ -4,15 +4,31 @@ import SearchResultItem from "./search-result-item";
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { BACK_ARROW_IMG } from "../constants";
-import { clearResults } from "../actions/actions"
+import { clearResults, clearError } from "../actions/actions"
 
 const SearchResults = () => {
   const results = useSelector(state => state.searchResults);
   const games = useSelector(state => state.games);
+  const error = useSelector(state => state.errors);
 
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const handleErrorBackClick = () => {
+    history.push('/games');
+    dispatch(clearError());
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h1>{error}</h1>
+        <img src={BACK_ARROW_IMG} alt= "" className="back-arrow-image" onClick={handleErrorBackClick}/>  
+      </div>   
+    )
+  }
+    
+  
   const renderResults = () => {
     if (!_.isEmpty(results)) {
       return results.map((result, index) => {
@@ -42,7 +58,7 @@ const SearchResults = () => {
       <img src={BACK_ARROW_IMG} alt= "" className="back-arrow-image" onClick={handleBackClick}/>
       <div className="row align-items-start">
         <h1>Results:</h1>
-        {renderResults()}
+        {renderResults()}       
       </div>
       </div>
     </div>

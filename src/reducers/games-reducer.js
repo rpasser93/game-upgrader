@@ -1,4 +1,4 @@
-import { REMOVE_GAME, ADD_GAME } from '../constants';    //add REMOVE GAME back in below
+import { REMOVE_GAME, ADD_GAME } from '../constants';
 
 const boardGamesReducer = (state = [], action) => {
   switch (action.type) {

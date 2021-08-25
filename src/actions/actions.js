@@ -1,7 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import { xml2js } from 'xml-js';
-import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR } from '../constants';
+import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR } from '../constants';
 
 // Fetches multiple games according to a query and dispatches another action with the fetched ids
 export function fetchGames(query) {
@@ -74,5 +74,12 @@ export function removeGame(id) {
 export function clearResults() {
   return {
     type: CLEAR_RESULTS
+  }
+}
+
+// Action creator for clearing error messages
+export function clearError() {
+  return {
+    type: CLEAR_ERROR
   }
 }
