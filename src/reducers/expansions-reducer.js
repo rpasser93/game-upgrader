@@ -25,6 +25,8 @@ const expansionsReducer = (state = [], action) => {
       }
     })
 
+    console.log(results);
+
     return results;
 
     default:

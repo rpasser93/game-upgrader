@@ -34,17 +34,18 @@ const SearchResults = () => {
       <div className="col-md-8 offset-2">
         <img src={LOADING_SPINNER_GIF} alt='' className="loading-spinner rounded mx-auto d-block"/>
       </div>
-      )}
+      )
+    }
 
-      return results.map((result) => {
-        let hasGame = _.find(games, {id: result.id});
-        
-        return (
-          <div key={result.id} className="col-md-2">
-            <SearchResultItem result={result} hasGame={hasGame}/>          
-          </div>
-        )
-      });
+    return results.map((result) => {
+      let hasGame = _.find(games, {id: result.id});
+      
+      return (
+        <div key={result.id} className="col-md-2">
+          <SearchResultItem result={result} hasGame={hasGame}/>          
+        </div>
+      )
+    });
   }
 
   const handleBackClick = () => {    

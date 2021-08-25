@@ -7,13 +7,15 @@ const searchResultsReducer = (state = {}, action) => {
 
       const results = action.payload.map(game => {
         const id = game._attributes.id;
+        const expansions = game.link.filter((curr) => curr._attributes.type === 'boardgameexpansion');
 
         return {
           id: parseInt(id, 10),
           name: isArray(game.name) ? game.name[0]._attributes.value : game.name._attributes.value,
           imgUrl: game?.image?._text ? game.image._text : '',
           thumbnailUrl: game?.thumbnail?._text ? game.thumbnail._text : '',
-          bggUrl: `https://boardgamegeek.com/boardgame/${id}`
+          bggUrl: `https://boardgamegeek.com/boardgame/${id}`,
+          expansions: expansions
         }
       })
 
