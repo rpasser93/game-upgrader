@@ -79,3 +79,25 @@ code {
   text-align: center;
   display: block;
 }
+
+.search-results-title {
+  margin-top: 15px;
+}
+
+.done-with-search {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.search-result-game {
+  margin-top: 25px;
+}
+
+.search-result-game-name {
+  height: 25px;
+  overflow: hidden;
+}
+
+.back-from-search {
+  margin-top: 20px;
+}

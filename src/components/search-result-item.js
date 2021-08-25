@@ -1,35 +1,23 @@
-import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { BACK_ARROW_IMG } from "../constants";
-import { addGame, clearResults } from '../actions/actions';
+import { addGame } from '../actions/actions';
 
-const SearchResultItem = ({result, backButton, hasGame}) => {
-  const history = useHistory();
+const SearchResultItem = ({result, hasGame}) => {
   const dispatch = useDispatch();
 
   const handleAddClick = () => {
     dispatch(addGame(result));
   }
-
-  const handleBackClick = () => {
-    history.push('/games');
-    dispatch(clearResults());
-  }
-
+  
   return (
-    <div>
-      <div>
-        <p><strong>{result.name}</strong></p>
+    <div className="search-result-game">
+      <div className="text-center">
         <img src={result.thumbnailUrl} alt={result.name}></img>
-        {!hasGame && <button className="btn btn-primary search-btn btn-sm" onClick={handleAddClick}>
-            Add to Shelf
+        <p className="search-result-game-name"><strong>{result.name}</strong></p>
+        {!hasGame && <button className="btn btn-primary btn-sm" onClick={handleAddClick}>
+            Add
         </button>}
 
         {hasGame && <p><em>Game on shelf</em></p>}
-      </div>
-      
-      <div>
-      {backButton && <img src={BACK_ARROW_IMG} alt= "" className="back-arrow-image rounded float-end" onClick={handleBackClick}/>}
       </div>
 
     </div>
