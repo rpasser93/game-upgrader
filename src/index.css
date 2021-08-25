@@ -23,6 +23,20 @@ code {
   cursor: pointer;
 }
 
+.back-arrow-image:hover {
+  border: solid thin white;
+}
+
+.remove-game-image {
+  width: 25px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.remove-game-image:hover {
+  border: solid thin white;
+}
+
 .list-page-search-bar {
   margin-top: 15px;
 }
@@ -55,4 +69,8 @@ code {
 
 .magnifying-glass-icon:hover {
   border: solid thin white;
+}
+
+.not-found {
+  margin-top: 100px;
 }

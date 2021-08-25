@@ -1,4 +1,4 @@
-import { FETCH_GAME_BY_ID_SUCCESS } from '../constants';
+import { FETCH_GAME_BY_ID_SUCCESS, REMOVE_GAME } from '../constants';
 
 const boardGamesReducer = (state = [], action) => {
   switch (action.type) {
@@ -17,6 +17,10 @@ const boardGamesReducer = (state = [], action) => {
       console.log(game);
 
       return [...state, game];
+
+      case REMOVE_GAME:
+        return state.filter(game => game.id !== action.payload);
+
     default:
         return state;
   }
