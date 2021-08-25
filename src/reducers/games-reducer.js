@@ -11,7 +11,8 @@ const boardGamesReducer = (state = [], action) => {
         gameId: gameData._attributes.id,
         name: gameData.name[0]._attributes.value,
         imgUrl: gameData.image._text,
-        thumbnailUrl: gameData.thumbnail._text
+        thumbnailUrl: gameData.thumbnail._text,
+        bggUrl: `https://boardgamegeek.com/boardgame/${gameData._attributes.id}`
       }
 
       console.log(game);
@@ -19,7 +20,7 @@ const boardGamesReducer = (state = [], action) => {
       return [...state, game];
 
       case REMOVE_GAME:
-        return state.filter(game => game.id !== action.payload);
+        return state.filter(game => game.gameId !== action.payload);
 
     default:
         return state;

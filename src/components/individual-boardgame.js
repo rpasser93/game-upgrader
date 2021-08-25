@@ -13,7 +13,7 @@ const IndividualBoardgame = ({id, history}) => {
   }
 
   const handleRemoveClick = () => {
-    dispatch(removeGame(game.id));
+    dispatch(removeGame(game.gameId));
     history.push('/games');
   }
 
@@ -36,6 +36,7 @@ const IndividualBoardgame = ({id, history}) => {
           <img src={game.imgUrl} alt="" className="ind-game-image mx-auto d-block" />
           <br></br>
           <h1 className="text-center">{game.name}</h1>
+          <a href={game.bggUrl} className="bgg-link" target="blank">BGG Link</a>
         </div>
         <div className="col-4">
           <img src={REMOVE_GAME_IMG} alt= "" className="remove-game-image" onClick={handleRemoveClick} />

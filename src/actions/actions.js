@@ -48,9 +48,9 @@ export function fetchGameByIdSuccess(game) {
 }
 
 // Action creator for removing a game from the store
-export function removeGame(game) {
+export function removeGame(gameId) {
   return {
     type: REMOVE_GAME,
-    payload: game
+    payload: gameId
   }
 }
