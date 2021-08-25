@@ -1,14 +1,17 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {fetchGame} from '../actions/actions';
+import { useHistory } from 'react-router';
+import {fetchGames} from '../actions/actions';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
-    dispatch(fetchGame(search));
+    dispatch(fetchGames(search));
     e.preventDefault();
+    history.push('/results');
   }
 
   return (
@@ -27,7 +30,7 @@ const SearchBar = () => {
        </div>
 
        <button className="btn btn-primary search-btn btn-sm" type="submit">
-         Add Game
+         Search
        </button>        
      </form>
      <hr></hr>

@@ -6,7 +6,6 @@ const IndividualBoardgame = ({id, history}) => {
   const games = useSelector((state) => state.games);
 
   const handleClick = () => {
-    console.log('click!');
     history.push('/games');
   }
 
@@ -16,8 +15,6 @@ const IndividualBoardgame = ({id, history}) => {
   const game = games.find((current) => {
     return current.id === id;
   })
-
-  console.log(game);
 
   return (
     <div className="container">
