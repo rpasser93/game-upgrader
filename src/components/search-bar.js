@@ -5,10 +5,17 @@ import {MAG_GLASS_IMG} from '../constants';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+    setInputValue(e.target.value);
+  }
 
   const handleSubmit = (e) => {
     dispatch(fetchGame(search));
+    setInputValue('');
     e.preventDefault();
   }
 
@@ -26,10 +33,9 @@ const SearchBar = () => {
 
        <div className="col-md-8">
          <input className="form-control list-page-search-bar"
-          placeholder="Enter game name" onChange={(e) => setSearch(e.target.value)}>
+          placeholder="Enter game name" onChange={handleChange} value={inputValue}>
           </input>
           </div>
-
        </div>
      </form>
      <hr></hr>
