@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { xml2js } from 'xml-js';
 import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, 
   ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR, 
-  FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS} from '../constants';
+  FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS} from '../constants';
 
 // Function that retrieves ids from xml responses
 const getIdsFromXML = (xml) => {
@@ -34,19 +34,6 @@ export function fetchGames(query) {
   }
 }
 
-// Fetches all of a game's expansions and dispatches another actions with the fetched ids
-export function fetchExpansions(game) {
-  return (dispatch) => {
-    axios.get(`${FETCH_MULTIPLE_URL}${game}&type=boardgameexpansion`)
-    .then(response => {
-      dispatch(fetchExpansionsByIds(_.uniq(getIdsFromXML(response.data))));      
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }
-}
-
 // Fetches games using a supplied array of ids
 const fetchGamesByIds = (ids) => {
   return (dispatch) => {
@@ -61,7 +48,7 @@ const fetchGamesByIds = (ids) => {
 }
 
 // Fetches expansions using a supplied array of ids
-const fetchExpansionsByIds = (ids) => {
+export function fetchExpansionsByIds(ids) {
   return (dispatch) => {
     axios.get(`${ID_FETCH_URL}${ids.join()}`)
     .then(response => {
@@ -125,6 +112,13 @@ export function removeGame(id) {
 export function clearResults() {
   return {
     type: CLEAR_RESULTS
+  }
+}
+
+// Action creator for clearing the expansions
+export function clearExpansions() {
+  return {
+    type: CLEAR_EXPANSIONS
   }
 }
 
