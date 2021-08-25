@@ -1,7 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import { xml2js } from 'xml-js';
-import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, ADD_GAME, CLEAR_RESULTS } from '../constants';
+import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, ADD_GAME, CLEAR_RESULTS, REMOVE_GAME } from '../constants';
 
 export function fetchGames(query) {
   return (dispatch) => {
@@ -46,6 +46,14 @@ export function addGame(game) {
   return {
     type: ADD_GAME,
     payload: game
+  }
+}
+
+// Action creator for removing a game from the store
+export function removeGame(gameId) {
+  return {
+    type: REMOVE_GAME,
+    payload: gameId
   }
 }
 
