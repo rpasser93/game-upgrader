@@ -27,7 +27,6 @@ const SearchResults = () => {
       </div>   
     )
   }
-    
   
   const renderResults = () => {
     if (!_.isEmpty(results)) {
