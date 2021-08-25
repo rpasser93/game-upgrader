@@ -50,10 +50,10 @@ export function addGame(game) {
 }
 
 // Action creator for removing a game from the store
-export function removeGame(gameId) {
+export function removeGame(id) {
   return {
     type: REMOVE_GAME,
-    payload: gameId
+    payload: id
   }
 }
 

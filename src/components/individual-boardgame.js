@@ -13,7 +13,7 @@ const IndividualBoardgame = ({id, history}) => {
   }
 
   const handleRemoveClick = () => {
-    dispatch(removeGame(game.gameId));
+    dispatch(removeGame(game.id));
     history.push('/games');
   }
 
