@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import {useDispatch} from 'react-redux';
-import {removeGame} from '../actions/actions';
+import {removeGame, fetchGames} from '../actions/actions';
 import { BACK_ARROW_IMG, REMOVE_GAME_IMG } from '../constants';
 import _ from 'lodash';
 
