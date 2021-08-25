@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import {useDispatch} from 'react-redux';
-import {removeGame, fetchExpansions} from '../actions/actions';
+import {removeGame } from '../actions/actions';
 import { BACK_ARROW_IMG, REMOVE_GAME_IMG } from '../constants';
 import _ from 'lodash';
 
@@ -26,7 +26,9 @@ const IndividualBoardgame = ({id, history}) => {
     return current.id === id;
   })
 
-  dispatch(fetchExpansions(game.name));
+  const renderExpansions = () => {
+    
+  }
 
   return (
     <div className="container">
@@ -44,6 +46,7 @@ const IndividualBoardgame = ({id, history}) => {
           <img src={REMOVE_GAME_IMG} alt= "" className="remove-game-image" onClick={handleRemoveClick} />
         </div>
       </div>
+      {renderExpansions()};
     </div>
   )
 }

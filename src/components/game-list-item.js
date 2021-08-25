@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { fetchExpansions } from "../actions/actions";
 
 const GameListItem = ({game}) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const clickHandler = () => {
     history.push(`/games/${game.id}`);
+    dispatch(fetchExpansions(game.name));
   }
 
   return (
