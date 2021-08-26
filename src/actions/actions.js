@@ -13,6 +13,16 @@ const getIdsFromXML = (xml) => {
   })
 }
 
+// Function that returns fetched ids that don't exist in the store
+const getUniqueIds = (ids, getState) => {
+  const games = getState().games;
+  const existingIds = games.map((curr) => {
+    return curr.id;
+  })
+
+  return ids.filter(val => !existingIds.includes(parseInt(val)));
+}
+
 // Function that converts game data from xml to js object
 const getGameDataFromXML = (xml) => {
   const data = xml2js(xml, {compact: true, space: 4});
@@ -21,12 +31,14 @@ const getGameDataFromXML = (xml) => {
 
 // Fetches multiple games according to a query and dispatches another action with the fetched ids
 export function fetchGames(query) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     axios.get(`${FETCH_MULTIPLE_URL}${query}`)
     .then(response => {
 
       // Avoid duplicate ids
-      dispatch(fetchGamesByIds(_.uniq(getIdsFromXML(response.data))));
+      const ids = _.uniq(getIdsFromXML(response.data));
+
+      dispatch(fetchGamesByIds(getUniqueIds(ids, getState)));
     })
     .catch(error => {
       dispatch(fetchGamesError(error, query));
@@ -49,8 +61,10 @@ const fetchGamesByIds = (ids) => {
 
 // Fetches expansions using a supplied array of ids
 export function fetchExpansionsByIds(ids) {
-  return (dispatch) => {
-    axios.get(`${ID_FETCH_URL}${ids.join()}`)
+  return (dispatch, getState) => {
+    const newIds = getUniqueIds(ids, getState);
+
+    axios.get(`${ID_FETCH_URL}${newIds.join()}`)
     .then(response => {
       dispatch(fetchExpansionsByIdsSuccess(getGameDataFromXML(response.data)));
     })
