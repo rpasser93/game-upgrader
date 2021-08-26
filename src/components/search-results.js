@@ -22,8 +22,13 @@ const SearchResults = () => {
   if (error) {
     return (
       <div>
-        <h1>{error}</h1>
-        <img src={BACK_ARROW_IMG} alt= "" className="back-arrow-image" onClick={handleErrorBackClick}/>  
+        <h2 className="text-center error-message-search">{error}</h2>
+        <br></br>
+        <div className="text-center">
+          <button className="btn btn-danger" onClick={handleErrorBackClick}>
+            Back to shelf
+          </button>
+        </div>
       </div>   
     )
   }
@@ -40,7 +45,7 @@ const SearchResults = () => {
         let hasGame = _.find(games, {id: result.id});
         
         return (
-          <div key={result.id} className="col-md-2">
+          <div key={result.id} className="col-md-2 search-game-container">
             <SearchResultItem result={result} hasGame={hasGame}/>          
           </div>
         )
@@ -60,20 +65,20 @@ const SearchResults = () => {
           <h3 className="search-results-title">Search Results:</h3>
           <h6>Add the appropriate game(s) to your shelf, then click 'Done!' when finished:</h6>
           <div className="row">
-          <div className="col-4">
-          <img src={BACK_ARROW_IMG} alt= "" className="back-arrow-image back-from-search rounded float-end" onClick={handleBackClick}/>
+            <div className="col-4">
+              <img src={BACK_ARROW_IMG} alt= "" className="back-arrow-image back-from-search rounded float-end" onClick={handleBackClick}/>
+            </div>
+            <div className="col-4">
+              <button className="btn btn-danger done-with-search" onClick={handleBackClick}>
+                Done!
+              </button>
           </div>
-          <div className="col-4">
-          <button className="btn btn-danger done-with-search" onClick={handleBackClick}>
-            Done!
-        </button>
-        </div>
         </div>
         </div>
       </div>
 
       <div className="col-md-10 offset-1">
-      <div className="row align-items-start">
+      <div className="row align-items-end">
           {renderResults()}
       </div>
       </div>
