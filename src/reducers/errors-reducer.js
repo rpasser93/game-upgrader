@@ -7,7 +7,7 @@ const errorsReducer = (state = '', action) => {
     case FETCH_GAMES_BY_ID_ERROR:
       return 'Error: ID request failed.';
     case FETCH_EXPANSIONS_ERROR:
-      return 'No expansions found';   
+      return 'No expansions found.';   
     case CLEAR_ERROR:
       return '';
     default:

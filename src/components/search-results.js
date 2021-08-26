@@ -79,9 +79,9 @@ const SearchResults = () => {
       </div>
 
       <div className="col-md-10 offset-1">
-      <div className="row align-items-end">
-          {renderResults()}
-      </div>
+        <div className="row align-items-end">
+            {renderResults()}
+        </div>
       </div>
     </div>
   )

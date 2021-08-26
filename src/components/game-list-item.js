@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { fetchExpansionsByIds } from "../actions/actions";
@@ -13,9 +12,9 @@ const GameListItem = ({game}) => {
   }
 
   return (
-    <div>
+    <div className="thumbnail-list-tnt" onClick={clickHandler}>
       <img src={game.thumbnailUrl} alt={game.name} className="mx-auto d-block thumbnail-list-image" onClick={clickHandler}></img>
-      <Link to={`/games/${game.id}`} className="game-list-link" onClick={clickHandler}>{game.name}</Link>
+      <p className="text-center text-decoration-underline thumbnail-list-text">{game.name}</p>
     </div>
   )
 }
