@@ -5,7 +5,7 @@ import { xml2js } from 'xml-js';
 import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, 
   ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR, 
   FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS, FETCH_EXPANSIONS_ERROR,
-ETSY_SEARCH_URL, FETCH_ETSY_ADDITIONS_SUCCESS} from '../constants';
+ETSY_SEARCH_URL, FETCH_ETSY_ADDITIONS_SUCCESS, CLEAR_ETSY_ADDITIONS} from '../constants';
 
 // Function that retrieves ids from xml responses
 const getIdsFromXML = (xml, type) => {
@@ -171,6 +171,13 @@ export function clearResults() {
 export function clearExpansions() {
   return {
     type: CLEAR_EXPANSIONS
+  }
+}
+
+// Action creator for clearing the etsy additions
+export function clearEtsyAdditions() {
+  return {
+    type: CLEAR_ETSY_ADDITIONS
   }
 }
 

@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {removeGame, clearExpansions, clearError } from '../actions/actions';
+import {removeGame, clearExpansions, clearError, clearEtsyAdditions } from '../actions/actions';
 import { BACK_ARROW_IMG, REMOVE_GAME_IMG } from '../constants';
 import _ from 'lodash';
 import ExpansionListItem from "./expansion-list-item";
@@ -15,6 +15,7 @@ const IndividualBoardgame = ({id, history}) => {
   const handleBackClick = () => {
     dispatch(clearExpansions());
     dispatch(clearError());
+    dispatch(clearEtsyAdditions());
     history.push('/games');
   }
 
