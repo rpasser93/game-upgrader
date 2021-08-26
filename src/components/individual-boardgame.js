@@ -23,8 +23,23 @@ const IndividualBoardgame = ({id, history}) => {
     }
   }
 
+  const handleErrorBackClick = () => {
+    history.push('/games');
+    dispatch(clearError());
+  }
+
   if (!_.find(games, {id: id}))
-    return <h1 className="text-center not-found">Game not found :(</h1>
+    return (
+      <div>
+        <h2 className="text-center not-found">Game not found :(</h2>
+        <br></br>
+        <div className="text-center">
+          <button className="btn btn-danger" onClick={handleErrorBackClick}>
+            Back to shelf
+          </button>
+        </div>
+      </div>
+      )
 
   const game = games.find((current) => {
     return current.id === id;
