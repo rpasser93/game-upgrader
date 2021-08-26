@@ -4,11 +4,10 @@ import GameListItem from "./game-list-item";
 
 const BoardGameList = () => {
   const games = useSelector((state) => state.games);
-  const sortedGames = _.sortBy(games, 'name');
 
   const renderGames = () => {
-    if (!_.isEmpty(sortedGames)) {
-      return sortedGames.map((game) => {
+    if (!_.isEmpty(games)) {
+      return games.map((game) => {
         return (
           <div key={game.id} className="col-xl-3 thumbnail-column">
             <GameListItem game={game} />          
