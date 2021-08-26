@@ -47,9 +47,10 @@ const IndividualBoardgame = ({id, history}) => {
 
   const renderExpansions = () => {
     return expansions.map((expansion) => {
+      let hasExp = _.find(games, {id: expansion.id});
       return (
         <div key={expansion.id} className="col-md-2 mx-auto">
-          <ExpansionListItem expansion={expansion}/>          
+          <ExpansionListItem expansion={expansion} hasExp={hasExp}/>          
         </div>
       )
     });

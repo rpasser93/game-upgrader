@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { addGame } from '../actions/actions';
 
-const ExpansionListItem = ({expansion}) => {
+const ExpansionListItem = ({expansion, hasExp}) => {
   const dispatch = useDispatch();
 
   const handleAddClick = () => {
@@ -12,9 +12,10 @@ const ExpansionListItem = ({expansion}) => {
     <div>
       <img src={expansion.thumbnailUrl} alt={expansion.name} className="mx-auto d-block thumbnail-list-image"></img>
       <p>{expansion.name}</p>
-      <button className="btn btn-primary btn-sm" onClick={handleAddClick}>
+      {!hasExp && <button className="btn btn-primary btn-sm" onClick={handleAddClick}>
             Add
-        </button>
+        </button>}
+        {hasExp && <p className="added-to-shelf"><em>Added to shelf</em></p>}
     </div>
   )
 }
