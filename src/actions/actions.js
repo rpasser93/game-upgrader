@@ -5,7 +5,7 @@ import { xml2js } from 'xml-js';
 import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, 
   ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR, 
   FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS, FETCH_EXPANSIONS_ERROR,
-ETSY_SEARCH_URL} from '../constants';
+ETSY_SEARCH_URL, FETCH_ETSY_ADDITIONS_SUCCESS} from '../constants';
 
 // Function that retrieves ids from xml responses
 const getIdsFromXML = (xml, type) => {
@@ -88,7 +88,7 @@ export function fetchEtsyAdditions(game) {
   return (dispatch) => {
     axios.get(`${ETSY_SEARCH_URL}${game}`)
     .then(response => {
-      console.log(response.data);
+      dispatch(fetchEtsyAdditionsSuccess(response));
     })
     .catch(error => {
       console.log(error);
@@ -109,6 +109,14 @@ export function fetchExpansionsByIdsSuccess(expansions) {
   return {
     type: FETCH_EXPANSIONS_SUCCESS,
     payload: expansions
+  }
+}
+
+// Action creator for succesful etsy additions fetch
+export function fetchEtsyAdditionsSuccess(additions) {
+  return {
+    type: FETCH_ETSY_ADDITIONS_SUCCESS,
+    payload: additions
   }
 }
 

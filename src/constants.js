@@ -13,7 +13,7 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 export const FETCH_ETSY_ADDITIONS_SUCCESS = "FETCH_ETSY_ADDITIONS_SUCCESS";
 export const FETCH_ETSY_ADDITIONS_ERROR = "FETCH_ETSY_ADDITIONS_ERROR";
 export const ID_FETCH_URL = "https://www.boardgamegeek.com/xmlapi2/thing?&stats=1&id=";
-export const ETSY_SEARCH_URL = `https://openapi.etsy.com/v2/listings/active?api_key=${API_KEY}&keywords=`
+export const ETSY_SEARCH_URL = `https://openapi.etsy.com/v2/listings/active?api_key=${API_KEY}&limit=5&keywords=`
 export const BACK_ARROW_IMG = "https://image.flaticon.com/icons/png/512/60/60577.png";
 export const REMOVE_GAME_IMG = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHvQzPD7lYrTQvIywYogS50koNq25j2A3K7Q&usqp=CAU";
 export const MAG_GLASS_IMG = "https://static.thenounproject.com/png/340642-200.png";
