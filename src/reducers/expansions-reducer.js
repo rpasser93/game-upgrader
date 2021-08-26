@@ -18,12 +18,18 @@ const expansionsReducer = (state = [], action) => {
 
       const results = returnState.map(expansion => {
         const id = expansion._attributes.id;
+        const expansions = expansion.link.filter((curr) => curr._attributes.type === 'boardgameexpansion');
+        const expansionIds = expansions.map((expansion) => {
+          return parseInt(expansion._attributes.id);
+        })
+
         return {
           id: parseInt(id, 10),
           name: isArray(expansion.name) ? expansion.name[0]._attributes.value : expansion.name._attributes.value,
           imgUrl: expansion?.image?._text ? expansion.image._text : '',
           thumbnailUrl: expansion?.thumbnail?._text ? expansion.thumbnail._text : '',
-          bggUrl: `https://boardexpansiongeek.com/boardexpansion/${id}`,
+          bggUrl: `https://boardgamegeek.com/boardgameexpansion/${id}`,
+          expansionIds: expansionIds,
         }
       })
 
