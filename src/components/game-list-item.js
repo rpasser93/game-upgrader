@@ -1,6 +1,6 @@
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { fetchExpansionsByIds } from "../actions/actions";
+import { fetchExpansionsByIds, fetchEtsyAdditions } from "../actions/actions";
 
 const GameListItem = ({game}) => {
   const history = useHistory();
@@ -9,6 +9,7 @@ const GameListItem = ({game}) => {
   const clickHandler = () => {
     history.push(`/games/${game.id}`);
     dispatch(fetchExpansionsByIds(game.expansionIds));
+    dispatch(fetchEtsyAdditions(game.name));
   }
 
   return (

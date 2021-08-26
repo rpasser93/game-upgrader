@@ -3,7 +3,8 @@ import _ from 'lodash';
 import { xml2js } from 'xml-js';
 import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, 
   ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR, 
-  FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS, FETCH_EXPANSIONS_ERROR} from '../constants';
+  FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS, FETCH_EXPANSIONS_ERROR,
+  FETCH_ETSY_ADDITIONS_SUCCESS, FETCH_ETSY_ADDITIONS_ERROR, ETSY_SEARCH_URL} from '../constants';
 
 // Function that retrieves ids from xml responses
 const getIdsFromXML = (xml, type) => {
@@ -77,6 +78,19 @@ export function fetchExpansionsByIds(ids) {
     })
     .catch(error => {
       dispatch(fetchExpansionsByIdsError(error));
+    })
+  }
+}
+
+// Fetches any additions for a game on etsy
+export function fetchEtsyAdditions(game) {
+  return (dispatch) => {
+    axios.get(`${ETSY_SEARCH_URL}${game}`)
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
     })
   }
 }
