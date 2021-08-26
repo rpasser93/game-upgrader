@@ -1,4 +1,4 @@
-import { isArray } from 'lodash';
+import _ from 'lodash';
 import { FETCH_GAMES_BY_ID_SUCCESS, CLEAR_RESULTS } from "../constants";
 
 const searchResultsReducer = (state = {}, action) => {
@@ -14,15 +14,16 @@ const searchResultsReducer = (state = {}, action) => {
 
         return {
           id: parseInt(id, 10),
-          name: isArray(game.name) ? game.name[0]._attributes.value : game.name._attributes.value,
+          name: _.isArray(game.name) ? game.name[0]._attributes.value : game.name._attributes.value,
           imgUrl: game?.image?._text ? game.image._text : '',
           thumbnailUrl: game?.thumbnail?._text ? game.thumbnail._text : '',
           bggUrl: `https://boardgamegeek.com/boardgame/${id}`,
-          expansionIds: expansionIds
+          expansionIds: expansionIds,
+          numOwners: game.statistics.ratings.owned._attributes.value
         }
       })
 
-      return results;
+      return results.sort((a, b) => parseInt(b.numOwners) - parseInt(a.numOwners));
     
     case CLEAR_RESULTS:
       return [];
