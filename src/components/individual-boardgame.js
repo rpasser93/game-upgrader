@@ -1,5 +1,4 @@
-import { useSelector } from "react-redux";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {removeGame, clearExpansions, clearError } from '../actions/actions';
 import { BACK_ARROW_IMG, REMOVE_GAME_IMG } from '../constants';
 import _ from 'lodash';
@@ -8,6 +7,7 @@ import ExpansionListItem from "./expansion-list-item";
 const IndividualBoardgame = ({id, history}) => {
   const games = useSelector((state) => state.games);
   const expansions = useSelector((state) => state.expansions);
+
   const dispatch = useDispatch();
 
   const handleBackClick = () => {
@@ -47,12 +47,21 @@ const IndividualBoardgame = ({id, history}) => {
 
   const renderExpansions = () => {
     return expansions.map((expansion) => {
+      let hasExp = _.find(games, {id: expansion.id});
       return (
-        <div key={expansion.id} className="col-md-2">
-          <ExpansionListItem expansion={expansion}/>          
+        <div key={expansion.id} className="col-md-2 mx-auto">
+          <ExpansionListItem expansion={expansion} hasExp={hasExp}/>          
         </div>
       )
     });
+  }
+
+  const renderExpansionsHeader = () => {
+    if (expansions.length > 0) {
+      return (
+        <h2 className="text-decoration-underline expansions-title">Top Expansions:</h2>
+      )
+    }
   }
 
   return (
@@ -71,7 +80,16 @@ const IndividualBoardgame = ({id, history}) => {
           <img src={REMOVE_GAME_IMG} alt= "" className="remove-game-image" onClick={handleRemoveClick} />
         </div>
       </div>
-      {renderExpansions()}
+
+      <br></br>
+      <br></br>
+
+      <div className="row">
+        {renderExpansionsHeader()}
+      </div>
+      <div className="row text-center align-content-end expansion-row">
+        {renderExpansions()}
+      </div>
     </div>
   )
 }

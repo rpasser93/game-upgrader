@@ -21,7 +21,9 @@ const expansionsReducer = (state = [], action) => {
         return {
           id: parseInt(id, 10),
           name: isArray(expansion.name) ? expansion.name[0]._attributes.value : expansion.name._attributes.value,
+          imgUrl: expansion?.image?._text ? expansion.image._text : '',
           thumbnailUrl: expansion?.thumbnail?._text ? expansion.thumbnail._text : '',
+          bggUrl: `https://boardexpansiongeek.com/boardexpansion/${id}`,
         }
       })
 

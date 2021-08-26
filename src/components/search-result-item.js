@@ -12,12 +12,12 @@ const SearchResultItem = ({result, hasGame}) => {
     <div className="search-result-game-col">
       <div className="text-center">
         <img src={result.thumbnailUrl} alt={result.name} className="search-result-game-thumb"></img>
-        <p className="search-result-game-name"><strong>{result.name}</strong></p>
+        <p className="search-result-game-name">{result.name}</p>
         {!hasGame && <button className="btn btn-primary btn-sm" onClick={handleAddClick}>
             Add
         </button>}
 
-        {hasGame && <p><em>Added to shelf</em></p>}
+        {hasGame && <p className="added-to-shelf"><em>Added to shelf</em></p>}
       </div>
 
     </div>

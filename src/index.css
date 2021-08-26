@@ -45,13 +45,12 @@ code {
   margin-top: 10px;
 }
 
-.game-list-link {
-  display: block;
-  text-align: center;
-}
-
 .thumbnail-list-image {
   margin-top: 7px;
+  cursor: pointer;
+}
+
+.thumbnail-list-text {
   cursor: pointer;
 }
 
@@ -104,7 +103,7 @@ code {
 .search-result-game-name {
   margin-top: 10px;
   margin-bottom: 5px;
-  height: 30px;
+  height: 50px;
   overflow: hidden;
 }
 
@@ -118,4 +117,12 @@ code {
 
 .error-message-search {
   margin-top: 100px;
+}
+
+.added-to-shelf {
+  color: green;
+}
+
+.toggle-class {
+  display: none;
 }
