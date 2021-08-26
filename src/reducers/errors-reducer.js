@@ -6,7 +6,7 @@ const errorsReducer = (state = '', action) => {
       return `Unable to find game "${action.payload[1]}".`;
       
     case FETCH_GAMES_BY_ID_ERROR:
-      return 'Error: ID request failed';
+      return 'Error: ID request failed.';
     case CLEAR_ERROR:
       return '';
     default:
