@@ -6,11 +6,18 @@ import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS,
   FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS, FETCH_EXPANSIONS_ERROR} from '../constants';
 
 // Function that retrieves ids from xml responses
-const getIdsFromXML = (xml) => {
+const getIdsFromXML = (xml, type) => {
   const data = xml2js(xml, {compact: true, space: 4});
-  return data.items.item.map((game) => {
+  const ids = data.items.item.map((game) => {
     return game._attributes.id
   })
+
+  // Only get the first 48 game results
+  // This could be a temporary fix until we figure out pagination
+  if (ids.length > 48 && type === 'game')
+    return ids.slice(0, 48);
+  
+  return ids;
 }
 
 // Function that converts game data from xml to js object
@@ -26,7 +33,7 @@ export function fetchGames(query) {
     .then(response => {
 
       // Avoid duplicate ids
-      dispatch(fetchGamesByIds(_.uniq(getIdsFromXML(response.data))));
+      dispatch(fetchGamesByIds(_.uniq(getIdsFromXML(response.data, 'game'))));
     })
     .catch(error => {
       dispatch(fetchGamesError(error, query));
