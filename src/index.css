@@ -89,8 +89,16 @@ code {
   margin-bottom: 15px;
 }
 
-.search-result-game {
+.search-game-container {
+  margin-bottom: 25px;
+}
+
+.search-result-game-col {
   margin-top: 25px;
+}
+
+.search-result-game-thumb {
+  max-width: 150px;
 }
 
 .search-result-game-name {
@@ -104,4 +112,8 @@ code {
 
 .loading-spinner {
   width: 400px;
+}
+
+.error-message-search {
+  margin-top: 100px;
 }

@@ -9,15 +9,15 @@ const SearchResultItem = ({result, hasGame}) => {
   }
   
   return (
-    <div className="search-result-game">
+    <div className="search-result-game-col">
       <div className="text-center">
-        <img src={result.thumbnailUrl} alt={result.name}></img>
+        <img src={result.thumbnailUrl} alt={result.name} className="search-result-game-thumb"></img>
         <p className="search-result-game-name"><strong>{result.name}</strong></p>
         {!hasGame && <button className="btn btn-primary btn-sm" onClick={handleAddClick}>
             Add
         </button>}
 
-        {hasGame && <p><em>Game on shelf</em></p>}
+        {hasGame && <p><em>Added to shelf</em></p>}
       </div>
 
     </div>

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import {useDispatch} from 'react-redux';
-import {removeGame} from '../actions/actions';
+import {removeGame, clearError} from '../actions/actions';
 import { BACK_ARROW_IMG, REMOVE_GAME_IMG } from '../constants';
 import _ from 'lodash';
 
@@ -19,8 +19,23 @@ const IndividualBoardgame = ({id, history}) => {
     }
   }
 
+  const handleErrorBackClick = () => {
+    history.push('/games');
+    dispatch(clearError());
+  }
+
   if (!_.find(games, {id: id}))
-    return <h1 className="text-center not-found">Game not found :(</h1>
+    return (
+      <div>
+        <h2 className="text-center not-found">Game not found :(</h2>
+        <br></br>
+        <div className="text-center">
+          <button className="btn btn-danger" onClick={handleErrorBackClick}>
+            Back to shelf
+          </button>
+        </div>
+      </div>
+      )
 
   const game = games.find((current) => {
     return current.id === id;
