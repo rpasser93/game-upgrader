@@ -64,7 +64,7 @@ const SearchResults = () => {
       <div className="row text-center card sticky-top">
         <div className ="col-md-6 offset-3">
           <h3 className="search-results-title">Search Results:</h3>
-          <h6>Add the appropriate game(s) to your shelf, then click 'Done!' when finished:</h6>
+          <h6>Add the appropriate game(s) to your shelf, then click "Done!" when finished:</h6>
           <div className="row">
             <div className="col-4">
               <img src={BACK_ARROW_IMG} alt= "" className="back-arrow-image back-from-search rounded float-end" onClick={handleBackClick}/>
