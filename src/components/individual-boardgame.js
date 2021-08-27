@@ -1,18 +1,21 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {removeGame, clearExpansions, clearError } from '../actions/actions';
+import {removeGame, clearExpansions, clearError, clearEtsyAdditions } from '../actions/actions';
 import { BACK_ARROW_IMG, REMOVE_GAME_IMG } from '../constants';
 import _ from 'lodash';
 import ExpansionListItem from "./expansion-list-item";
+import EtsyAdditionItem from './etsy-addition-item';
 
 const IndividualBoardgame = ({id, history}) => {
   const games = useSelector((state) => state.games);
   const expansions = useSelector((state) => state.expansions);
+  const etsyAdditions = useSelector((state) => state.etsyAdditions);
 
   const dispatch = useDispatch();
 
   const handleBackClick = () => {
     dispatch(clearExpansions());
     dispatch(clearError());
+    dispatch(clearEtsyAdditions());
     history.push('/games');
   }
 
@@ -56,6 +59,16 @@ const IndividualBoardgame = ({id, history}) => {
     });
   }
 
+  const renderEtsyAdditions = () => {
+    return etsyAdditions.map((addition) => {
+      return (
+        <div key={addition.id} className="col-md-2 mx-auto">
+          <EtsyAdditionItem addition={addition}/>          
+        </div>
+      )
+    });
+  }
+
   const renderExpansionsHeader = () => {
     if (expansions.length > 0) {
       return (
@@ -90,6 +103,10 @@ const IndividualBoardgame = ({id, history}) => {
       <div className="row text-center align-content-end expansion-row">
         {renderExpansions()}
       </div>
+      <div className="row text-center align-content-end expansion-row">
+        {renderEtsyAdditions()}
+      </div>
+      <a href={`https://www.etsy.com/search?q=${game.name}`} target="blank">Browse on Etsy</a>
     </div>
   )
 }
