@@ -5,7 +5,7 @@ import { xml2js } from 'xml-js';
 import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, 
   ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR, 
   FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS, FETCH_EXPANSIONS_ERROR,
-ETSY_SEARCH_URL, FETCH_ETSY_ADDITIONS_SUCCESS, CLEAR_ETSY_ADDITIONS} from '../constants';
+ETSY_SEARCH_URL, FETCH_ETSY_ADDITIONS_SUCCESS, CLEAR_ETSY_ADDITIONS, FETCH_ETSY_ADDITIONS_ERROR} from '../constants';
 
 // Function that retrieves ids from xml responses
 const getIdsFromXML = (xml, type) => {
@@ -140,6 +140,14 @@ export function fetchGamesByIdsError(error) {
 export function fetchExpansionsByIdsError(error) {
   return {
     type: FETCH_EXPANSIONS_ERROR,
+    payload: error
+  }
+}
+
+// Action creator for etsy addition fetch errors
+export function fetchEtsyAdditionsError(error) {
+  return {
+    type: FETCH_ETSY_ADDITIONS_ERROR,
     payload: error
   }
 }
