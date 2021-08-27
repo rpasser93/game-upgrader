@@ -53,8 +53,7 @@ const getGameDataFromXML = (xml) => {
 export function fetchGames(query) {
   return (dispatch, getState) => {
     // Remove special characters to compensate for the BGG api's inconsistent search fetches
-    const searchQuery = query.replace(/\s/g , "-");
-    axios.get(`${FETCH_MULTIPLE_URL}${searchQuery.replace(/[^-a-zA-Z0-9]/g, '')}`)
+    axios.get(`${FETCH_MULTIPLE_URL}${query.replace(/[^-a-zA-Z0-9 ]/g, '')}`)
     .then(response => {
 
       // Avoid duplicate ids
