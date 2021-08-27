@@ -30,6 +30,7 @@ const expansionsReducer = (state = [], action) => {
           thumbnailUrl: expansion?.thumbnail?._text ? expansion.thumbnail._text : '',
           bggUrl: `https://boardgamegeek.com/boardgameexpansion/${id}`,
           expansionIds: expansionIds,
+          isExpansion: true
         }
       })
 

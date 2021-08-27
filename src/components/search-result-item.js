@@ -7,11 +7,17 @@ const SearchResultItem = ({result, hasGame}) => {
   const handleAddClick = () => {
     dispatch(addGame(result));
   }
-  
+
+  const handleThumbnailClick = () => {
+    const bggPage = result.bggUrl;
+    console.log(bggPage);
+    window.open(`${bggPage}`, '_blank');
+  }
+
   return (
     <div className="search-result-game-col">
       <div className="text-center">
-        <img src={result.thumbnailUrl} alt={result.name} className="search-result-game-thumb"></img>
+        <img src={result.thumbnailUrl} alt={result.name} className="search-result-game-thumb" onClick={handleThumbnailClick}></img>
         <p className="search-result-game-name">{result.name}</p>
         {!hasGame && <button className="btn btn-primary btn-sm" onClick={handleAddClick}>
             Add

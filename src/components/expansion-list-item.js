@@ -8,10 +8,16 @@ const ExpansionListItem = ({expansion, hasExp}) => {
     dispatch(addGame(expansion));
   }
 
+  const handleThumbnailClick = () => {
+    const bggPage = expansion.bggUrl;
+    console.log(bggPage);
+    window.open(`${bggPage}`, '_blank');
+  }
+
   return (
     <div>
-      <img src={expansion.thumbnailUrl} alt={expansion.name} className="mx-auto d-block thumbnail-list-image"></img>
-      <p>{expansion.name}</p>
+      <img src={expansion.thumbnailUrl} alt={expansion.name} className="mx-auto d-block thumbnail-list-image" onClick={handleThumbnailClick}></img>
+      <p className="expansion-tn-text">{expansion.name}</p>
       {!hasExp && <button className="btn btn-primary btn-sm" onClick={handleAddClick}>
             Add
         </button>}

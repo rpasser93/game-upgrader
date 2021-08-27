@@ -49,7 +49,7 @@ const IndividualBoardgame = ({id, history}) => {
     return expansions.map((expansion) => {
       let hasExp = _.find(games, {id: expansion.id});
       return (
-        <div key={expansion.id} className="col-md-2 mx-auto">
+        <div key={expansion.id} className="col-md-2 mx-auto expansion-tn-column">
           <ExpansionListItem expansion={expansion} hasExp={hasExp}/>          
         </div>
       )
@@ -59,7 +59,7 @@ const IndividualBoardgame = ({id, history}) => {
   const renderExpansionsHeader = () => {
     if (expansions.length > 0) {
       return (
-        <h2 className="text-decoration-underline expansions-title">Top Expansions:</h2>
+        <h2 className="text-decoration-underline expansions-title">Expansions to explore:</h2>
       )
     }
   }
@@ -87,7 +87,7 @@ const IndividualBoardgame = ({id, history}) => {
       <div className="row">
         {renderExpansionsHeader()}
       </div>
-      <div className="row text-center align-content-end expansion-row">
+      <div className="row text-center align-items-end expansion-row">
         {renderExpansions()}
       </div>
     </div>

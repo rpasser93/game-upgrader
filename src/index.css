@@ -52,6 +52,8 @@ code {
 
 .thumbnail-list-text {
   cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .thumbnail-column {
@@ -98,6 +100,7 @@ code {
 
 .search-result-game-thumb {
   max-width: 150px;
+  cursor: pointer;
 }
 
 .search-result-game-name {
@@ -125,4 +128,20 @@ code {
 
 .toggle-class {
   display: none;
+}
+
+.expansion-tn-column {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.expansion-tn-text {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.exp-denoter {
+  color: blue;
 }
