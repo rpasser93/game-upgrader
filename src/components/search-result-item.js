@@ -10,7 +10,6 @@ const SearchResultItem = ({result, hasGame}) => {
 
   const handleThumbnailClick = () => {
     const bggPage = result.bggUrl;
-    console.log(bggPage);
     window.open(`${bggPage}`, '_blank');
   }
 

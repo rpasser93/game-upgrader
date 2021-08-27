@@ -5,25 +5,32 @@ import { xml2js } from 'xml-js';
 import { ID_FETCH_URL, FETCH_MULTIPLE_URL, FETCH_GAMES_BY_ID_SUCCESS, 
   ADD_GAME, CLEAR_RESULTS, REMOVE_GAME, FETCH_GAMES_ERROR, CLEAR_ERROR, 
   FETCH_GAMES_BY_ID_ERROR, FETCH_EXPANSIONS_SUCCESS, CLEAR_EXPANSIONS, FETCH_EXPANSIONS_ERROR,
-ETSY_SEARCH_URL, FETCH_ETSY_ADDITIONS_SUCCESS, CLEAR_ETSY_ADDITIONS, FETCH_ETSY_ADDITIONS_ERROR} from '../constants';
+ETSY_SEARCH_URL, FETCH_ETSY_ADDITIONS_SUCCESS, CLEAR_ETSY_ADDITIONS, FETCH_ETSY_ADDITIONS_ERROR,
+FETCH_GAMES_ALL_ON_SHELF} from '../constants';
 
 // Function that retrieves ids from xml responses
 const getIdsFromXML = (xml, type) => {
   const data = xml2js(xml, {compact: true, space: 4});
-  const ids = data.items.item.map((game) => {
-    return game._attributes.id
-  })
 
-  // Only get the first 48 game results
-  // This could be a temporary fix until we figure out pagination
-  if (ids.length > 48 && type === 'game')
-    return ids.slice(0, 48);
+  // Check for more than one result
+  if (_.isArray(data.items.item)){
+    const ids = data.items.item.map((game) => {
+      return game._attributes.id
+    })
   
-  return ids;
+    // Only get the first 48 game results
+    // This could be a temporary fix until we figure out pagination
+    if (ids.length > 48 && type === 'game')
+      return ids.slice(0, 48);
+    
+    return ids;
+  }
+
+  return [data.items.item._attributes.id];
 }
 
 // Function that returns fetched ids that don't exist in the store
-const getUniqueIds = (ids, getState) => {
+const getNewIds = (ids, getState) => {
   const games = getState().games;
   const existingIds = games.map((curr) => {
     return curr.id;
@@ -35,19 +42,30 @@ const getUniqueIds = (ids, getState) => {
 // Function that converts game data from xml to js object
 const getGameDataFromXML = (xml) => {
   const data = xml2js(xml, {compact: true, space: 4});
-  return data.items.item;
+  
+  if (_.isArray(data.items.item))
+    return data.items.item;
+  
+  return [data.items.item];
 }
 
 // Fetches multiple games according to a query and dispatches another action with the fetched ids
 export function fetchGames(query) {
   return (dispatch, getState) => {
-    axios.get(`${FETCH_MULTIPLE_URL}${query}`)
+    // Remove most special characters to compensate for the BGG api's inconsistent search fetches
+    axios.get(`${FETCH_MULTIPLE_URL}${query.replace(/[^-a-zA-Z0-9 ]/g, '')}`)
     .then(response => {
 
       // Avoid duplicate ids
       const ids = _.uniq(getIdsFromXML(response.data, 'game'));
+      const newIds =  getNewIds(ids, getState);
 
-      dispatch(fetchGamesByIds(getUniqueIds(ids, getState)));
+      if (newIds.length > 0)
+        dispatch(fetchGamesByIds(newIds));
+      
+      else
+        dispatch(fetchGamesAllOnShelf());
+      
     })
     .catch(error => {
       dispatch(fetchGamesError(error, query));
@@ -71,7 +89,7 @@ const fetchGamesByIds = (ids) => {
 // Fetches expansions using a supplied array of ids
 export function fetchExpansionsByIds(ids) {
   return (dispatch, getState) => {
-    const newIds = getUniqueIds(ids, getState);
+    const newIds = getNewIds(ids, getState);
 
     axios.get(`${ID_FETCH_URL}${newIds.join()}`)
     .then(response => {
@@ -91,7 +109,7 @@ export function fetchEtsyAdditions(game) {
       dispatch(fetchEtsyAdditionsSuccess(response));
     })
     .catch(error => {
-      console.log(error);
+      dispatch(fetchEtsyAdditionsError(error));
     })
   }
 }
@@ -117,6 +135,13 @@ export function fetchEtsyAdditionsSuccess(additions) {
   return {
     type: FETCH_ETSY_ADDITIONS_SUCCESS,
     payload: additions
+  }
+}
+
+// Action creator for when all fetched games are already on shelf
+export function fetchGamesAllOnShelf() {
+  return {
+    type: FETCH_GAMES_ALL_ON_SHELF
   }
 }
 
