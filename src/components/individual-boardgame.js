@@ -59,20 +59,28 @@ const IndividualBoardgame = ({id, history}) => {
     });
   }
 
+  const renderExpansionsHeader = () => {
+    if (expansions.length > 0) {
+      return (
+        <h2 className="text-decoration-underline expansions-title">Expansions to explore:</h2>
+      )
+    }
+  }
+
   const renderEtsyAdditions = () => {
     return etsyAdditions.map((addition) => {
       return (
-        <div key={addition.id} className="col-md-2 mx-auto">
+        <div key={addition.id} className="col-md-2 mx-auto etsy-tn-column">
           <EtsyAdditionItem addition={addition}/>          
         </div>
       )
     });
   }
 
-  const renderExpansionsHeader = () => {
-    if (expansions.length > 0) {
+  const renderEtsyHeader = () => {
+    if (etsyAdditions.length > 0) {
       return (
-        <h2 className="text-decoration-underline expansions-title">Expansions to explore:</h2>
+        <h2 className="text-decoration-underline etsy-title">Upgrades from Etsy:</h2>
       )
     }
   }
@@ -103,10 +111,13 @@ const IndividualBoardgame = ({id, history}) => {
       <div className="row text-center align-items-end expansion-row">
         {renderExpansions()}
       </div>
+      <br></br>
+      <div className="row">
+        {renderEtsyHeader()}
+      </div>
       <div className="row text-center align-content-end expansion-row">
         {renderEtsyAdditions()}
       </div>
-      <a href={`https://www.etsy.com/search?q=${game.name}`} target="blank">Browse on Etsy</a>
     </div>
   )
 }

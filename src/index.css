@@ -145,3 +145,17 @@ code {
 .exp-denoter {
   color: blue;
 }
+
+.etsy-tn-text {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  height: 50px;
+  overflow: hidden;
+  color: #0645ad;
+  cursor: pointer;
+}
+
+.etsy-tn-column {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
