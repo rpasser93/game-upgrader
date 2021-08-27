@@ -10,7 +10,6 @@ const ExpansionListItem = ({expansion, hasExp}) => {
 
   const handleThumbnailClick = () => {
     const bggPage = expansion.bggUrl;
-    console.log(bggPage);
     window.open(`${bggPage}`, '_blank');
   }
 

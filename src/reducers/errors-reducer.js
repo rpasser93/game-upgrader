@@ -1,10 +1,12 @@
 import { CLEAR_ERROR, FETCH_GAMES_ERROR, FETCH_GAMES_BY_ID_ERROR,
-   FETCH_EXPANSIONS_ERROR, FETCH_ETSY_ADDITIONS_ERROR } from "../constants";
+   FETCH_EXPANSIONS_ERROR, FETCH_ETSY_ADDITIONS_ERROR, FETCH_GAMES_ALL_ON_SHELF } from "../constants";
 
 const errorsReducer = (state = '', action) => {
   switch (action.type) {
     case FETCH_GAMES_ERROR:
-      return `Unable to find game "${action.payload[1]}".`;     
+      return `Unable to find game "${action.payload[1]}".`; 
+    case FETCH_GAMES_ALL_ON_SHELF:
+      return 'All results are already on your shelf!';
     case FETCH_GAMES_BY_ID_ERROR:
       return 'Error: ID request failed.';
     case FETCH_EXPANSIONS_ERROR:
